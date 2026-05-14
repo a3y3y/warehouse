@@ -12,7 +12,7 @@ services:
 
   warehouse:
     build:
-      context: ./warehouse
+      context: ./warehouse-ui
       dockerfile: Dockerfile
     ports:
       - "3000:80"
