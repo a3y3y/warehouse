@@ -1,0 +1,8 @@
+[submodule "warehouse-ui"]
+	path = warehouse-ui
+	url = https://github.com/a3y3y/warehouse-ui.git
+	branch = main
+[submodule "warehouse-api"]
+	path = warehouse-api
+	url = https://github.com/a3y3y/warehouse-api.git
+	branch = main

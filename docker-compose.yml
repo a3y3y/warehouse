@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  warehouse-api:
+    build:
+      context: ./warehouse-api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - warehouse-network
+
+  warehouse:
+    build:
+      context: ./warehouse
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - warehouse-api
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+    networks:
+      - warehouse-network
+
+networks:
+  warehouse-network:
+    driver: bridge
